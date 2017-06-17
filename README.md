@@ -59,6 +59,7 @@ help yfNiDaqAoBContDoConst
 ```
 
 ## DOI
+[![DOI](https://zenodo.org/badge/94625377.svg)](https://zenodo.org/badge/latestdoi/94625377)
 
 ## Versioning
 We use [SemVer](http://semver.org/) for versioning.
