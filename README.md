@@ -12,7 +12,7 @@ Matlab GUI controlling a National Instruments Daq
 
 ### Installing
 * Install Matlab, Data Acquisition Toolbox, and Driver (NI-DAQmx).
-* Connect your Ni Daq.
+* Connect your Ni Daq to your PC.
 * Give your Matlab pass to the m and fig files.
 
 ### How to use
