@@ -1,11 +1,15 @@
 function [SquareWave,Time] = stimf_CreateSquarePulses(PulseFreq, PulseWidth, Duration, Fs)
 % 
-% PulseFreq: in Hz
-% PluseWidth: in second
-% Duration: in second
-% Fs: sampling rate
+%   [SquareWave,Time] = stimf_CreateSquarePulses(PulseFreq, PulseWidth, Duration, Fs)
+%   PulseFreq: in Hz
+%   PluseWidth: in second
+%   Duration: in second
+%   Fs: sampling rate
+%   SquareWave: output square pulse
+%   Time: in second
 % 
-% (c) Yuichi Takeuchi 2016
+% Copyright (c) 2016 Yuichi Takeuchi
+%
 
 Time = 0:1/Fs:Duration;
 pulseperiods = [0:floor(Duration*PulseFreq)]*Duration/PulseFreq;
