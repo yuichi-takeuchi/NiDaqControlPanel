@@ -1,5 +1,5 @@
 # NiDaqControlPanel
-Matlab GUI controlling a National Instruments Daq
+Matlab GUI for controlling National Instruments data acquisition boards
 
 ## Getting Started
 
