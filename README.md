@@ -8,7 +8,10 @@ Matlab GUI for controlling National Instruments data acquisition boards
 * Matlab (https://www.mathworks.com/products/matlab.html)
 * Data Acquisition Toolbox (https://jp.mathworks.com/products/daq.html)
 
-* The code has been tested with a USB-6212, Matlab version 8.6 (R2015b), and Data Acquisition Toolbox ver. 3.5.2 (R2015b).
+Optional (only for stimf_CreateSquarePulses.m)
+* Singal Processing Toolbox (https://www.mathworks.com/products/signal.html)
+
+* The code has been tested with a USB-6212, Matlab ver 8.6 (R2015b), Data Acquisition Toolbox ver 3.5.2 (R2015b), Signal Processing Toolbox ver 7.1 (R2015b).
 
 ### Installing
 * Install Matlab, Data Acquisition Toolbox, and Driver (NI-DAQmx).
