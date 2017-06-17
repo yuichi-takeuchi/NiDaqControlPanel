@@ -16,21 +16,24 @@ Matlab GUI controlling a National Instruments Daq
 * Give your Matlab pass to the m and fig files.
 
 ### How to use
-* GUI
+* With GUI (NiDaqControlPanel)
 1. Launch the Matlab.
 2. Launch NiDaqControlPanel
-...
+```
 guide NiDaqControlPanel
-...
+```
 and Run Figure (Ctrl + T)
 3. or Run NiDaqControlPanel.fig directly
-...
+```
 NiDaqControlPanel.fig
-...
+```
+4. Set channels (Analog inputs: AiX, Analog outputs: AoX, and Digital outputs: DoX), and parameters including sampling rate, timeout, latency on the control panel.
+5. If needed, set output analog waveform as stimulus wave by making it in the pseude command line in the control panel (edit10). Stimulation waves can be imported from workspace of Matlab by selecting it with popupmenu9. The output stimulus wave will be displayed on the axes2 (axis below on the panel).
+6. Select a function you want to launch from popupmenu10 in function group.
+7. Press Run button.
 
-* You can do the above procedure by launching cells one-by-one in MTOPrep.m file.
-* Objective and NormalValues are cells which have a string in their each cell.
-* You can change strings and utilize it to another purpose.
+* Without GUI
+Functions with yf prefixes can work by stand alone. It would be useful when multiple trials with differenct parameters needed to be automated. Several examples are given in NiDaqControlPanelDemo.m.
 
 ## DOI
 
