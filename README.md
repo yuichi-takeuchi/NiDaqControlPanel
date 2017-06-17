@@ -18,12 +18,12 @@ Matlab GUI controlling a National Instruments Daq
 ### How to use
 * With GUI (NiDaqControlPanel)
 1. Launch the Matlab.
-2. Launch NiDaqControlPanel
+2. Launch NiDaqControlPanel as
 ```
 guide NiDaqControlPanel
 ```
-and Run Figure (Ctrl + T)
-3. or Run NiDaqControlPanel.fig directly
+and Run Figure (Ctrl+T).
+3. or Run NiDaqControlPanel.fig directly.
 ```
 NiDaqControlPanel.fig
 ```
@@ -53,7 +53,7 @@ Functions with yf prefixes can work in stand-alone. It would be useful when mult
 * yfNiDaqLoadLog: Load log (log.bin).
 
 ## Help
-Use help function as below.
+Use the help function as below.
 ```
 help yfNiDaqAoBContDoConst
 ```
