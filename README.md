@@ -21,12 +21,12 @@ The code has been tested with a USB-6212, Matlab ver 8.6 (R2015b), Data Acquisit
 1. Launch the Matlab.
 2. Launch NiDaqControlPanel as
 ```
-guide NiDaqControlPanel
+guide NiDaqControlPanel.fig
 ```
 and Run Figure (Ctrl+T).
 3. or Run NiDaqControlPanel.fig directly.
 ```
-NiDaqControlPanel.fig
+NiDaqControlPanel
 ```
 4. Set channels (Analog inputs: AiX, Analog outputs: AoX, and Digital outputs: DoX), and parameters including sampling rate, timeout, latency on the control panel.
 5. If needed, set output analog waveform as stimulus wave by making it in the pseude command line in the control panel (edit10). Stimulation waves can be imported from workspace of Matlab by selecting it with popupmenu9. The output stimulus wave will be displayed on the axes2 (axis below on the panel).
