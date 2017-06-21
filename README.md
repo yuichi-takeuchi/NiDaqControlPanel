@@ -18,7 +18,7 @@ The code has been tested with a USB-6212, Matlab ver 8.6 (R2015b), Data Acquisit
 
 ### How to use
 * With GUI (NiDaqControlPanel)
-1. Launch the Matlab.
+1. Launch Matlab.
 2. Launch NiDaqControlPanel as
 ```
 guide NiDaqControlPanel.fig
