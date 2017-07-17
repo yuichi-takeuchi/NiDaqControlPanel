@@ -1,9 +1,10 @@
-function [Data, Time] = yfNiDaqAiAoFTrig(AiCh, AoCh, AoWaveform, rate)
+function [Data, Time] = yfNiDaqAiAoFTrig(AiCh, AoCh, AoWaveform, rate, TriggerTimeout)
 %
-%   [Data, Time] = yfNiDaqAiAoFTrig(AiCh, AoCh, AoWaveform, rate)
+%   [Data, Time] = yfNiDaqAiAoFTrig(AiCh, AoCh, AoWaveform, rate, TriggerTimeout)
 %   AiCh: Vector
 %   AoCh: Vector
 %   AoWaveform: Vector or Matrix
+%   TriggerTimeout: in sec
 %   rate: sampling rate in Hz
 %   Data: Matrix or Matrix
 %   Time: Vector
@@ -24,8 +25,7 @@ end
 addTriggerConnection(s, 'External', 'Dev1/PFI0', 'StartTrigger');   % Create an externaal trigger connection and set the trigger to run on time.
 s.Connections(1).TriggerCondition = 'RisingEdge';
 s.TriggersPerRun = 1;
-% s.ExternalTriggerTimeout = 30;
-% s.TriggersPerRun = 2;
+s.ExternalTriggerTimeout = TriggerTimeout;
 
 aoch = addAnalogOutputChannel(s, d.ID, AoCh, 'Voltage');
 

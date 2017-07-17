@@ -1,9 +1,10 @@
-function [Data, Time] = yfNiDaqAiFTrig(AiCh, rate, duration)
+function [Data, Time] = yfNiDaqAiFTrig(AiCh, rate, duration, TriggerTimeout)
 %
-%   [Data, Time] = yfNiDaqAiFTrig(AiCh, rate, duration)
+%   [Data, Time] = yfNiDaqAiFTrig(AiCh, rate, duration, TriggerTimeout)
 %   AiCh: Vector
 %   rate: sampling rate in Hz
 %   duration: in s
+%   TriggerTimeout: in s
 %   Data: Matrix or Matrix
 %   Time: Vector
 %
@@ -26,8 +27,7 @@ end
 addTriggerConnection(s, 'External', 'Dev1/PFI0', 'StartTrigger');   % Create an externaal trigger connection and set the trigger to run on time.
 s.Connections(1).TriggerCondition = 'RisingEdge';
 s.TriggersPerRun = 1;
-% s.ExternalTriggerTimeout = 30;
-% s.TriggersPerRun = 2;
+s.ExternalTriggerTimeout = TriggerTimeout;
 
 [Data, Time] = s.startForeground();
 plot(Time, Data)
