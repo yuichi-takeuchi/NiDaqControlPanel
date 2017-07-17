@@ -22,7 +22,7 @@ function varargout = NiDaqControlPanel(varargin)
 
 % Edit the above text to modify the response to help NiDaqControlPanel
 
-% Last Modified by GUIDE v2.5 23-May-2017 18:59:47
+% Last Modified by GUIDE v2.5 17-Jul-2017 23:18:25
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -100,12 +100,18 @@ switch handles.popupmenu10.Value
     case 10
         callback_yfNiDaqAoBContDoConst(handles)
     case 11
-        callback_yfNiDaqAoF(handles)
+        callback_yfNiDaqAoBContDoConstTrig(handles)
     case 12
-        callback_yfNiDaqAoSS(handles)
+        callback_yfNiDaqAoBContTrig(handles)
     case 13
-        callback_yfNiDaqDo(handles)
+        callback_yfNiDaqAoF(handles)
     case 14
+        callback_yfNiDaqAoFTrig(handles)
+    case 15
+        callback_yfNiDaqAoSS(handles)
+    case 16
+        callback_yfNiDaqDo(handles)
+    case 17
         callback_yfNiDaqLoadLog(handles)
     otherwise 
 end
@@ -134,11 +140,12 @@ assignin('base', handles.edit3.String, Data);
 assignin('base', handles.edit4.String, Time);
 
 function callback_yfNiDaqAiAoFTrig(handles)
-rate = str2double(handles.edit1.String);
-AoWaveform = handles.axes2.Children.YData;
 AiCh = setTerminationAiCh(handles);
+AoWaveform = handles.axes2.Children.YData;
+rate = str2double(handles.edit1.String);
+TriggerTimeout = str2double(handles.edit14.String);
 [AoCh, Value] = setTerminationAoCh(handles);
-[Data, Time] = yfNiDaqAiAoFTrig(AiCh, AoCh, AoWaveform, rate);
+[Data, Time] = yfNiDaqAiAoFTrig(AiCh, AoCh, AoWaveform, rate, TriggerTimeout);
 plot(handles.axes1, Time, Data);
 assignin('base', handles.edit3.String, Data);
 assignin('base', handles.edit4.String, Time);
@@ -164,8 +171,9 @@ assignin('base', handles.edit4.String, Time);
 function callback_yfNiDaqAiFTrig(handles)
 AiCh = setTerminationAiCh(handles);
 rate = str2double(handles.edit1.String);
+TriggerTimeout = str2double(handles.edit14.String);
 duration = str2double(handles.edit11.String);
-[Data, Time] = yfNiDaqAiFTrig(AiCh, rate, duration);
+[Data, Time] = yfNiDaqAiFTrig(AiCh, rate, duration, TriggerTimeout);
 plot(handles.axes1, Time, Data);
 assignin('base', handles.edit3.String, Data);
 assignin('base', handles.edit4.String, Time);
@@ -183,6 +191,14 @@ rate = str2double(handles.edit1.String);
 timeout = str2double(handles.edit11.String);
 yfNiDaqAoBCont(AoCh, AoWaveform, rate, timeout)
 
+function callback_yfNiDaqAoBContTrig(handles)
+[AoCh, Value] = setTerminationAoCh(handles);
+AoWaveform = handles.axes2.Children.YData;
+rate = str2double(handles.edit1.String);
+timeout = str2double(handles.edit11.String);
+TriggerTimeout = str2double(handles.edit14.String);
+yfNiDaqAoBContTrig(AoCh, AoWaveform, rate, timeout, TriggerTimeout)
+
 function callback_yfNiDaqAoBContDoConst(handles)
 [AoCh, Value] = setTerminationAoCh(handles);
 AoWaveform = handles.axes2.Children.YData;
@@ -194,11 +210,30 @@ binaryVector = decimalToBinaryVector(dec, 4, 'LSBFirst');
 Latency = str2double(handles.edit13.String);
 yfNiDaqAoBContDoConst(AoCh, AoWaveform, rate, timeout, DoCh, binaryVector, Latency)
 
+function callback_yfNiDaqAoBContDoConstTrig(handles)
+[AoCh, Value] = setTerminationAoCh(handles);
+AoWaveform = handles.axes2.Children.YData;
+rate = str2double(handles.edit1.String);
+timeout = str2double(handles.edit11.String);
+TriggerTimeout = str2double(handles.edit14.String);
+DoCh = '0:3';
+dec = str2num(handles.edit12.String);
+binaryVector = decimalToBinaryVector(dec, 4, 'LSBFirst');
+Latency = str2double(handles.edit13.String);
+yfNiDaqAoBContDoConstTrig(AoCh, AoWaveform, rate, timeout, TriggerTimeout, DoCh, binaryVector, Latency)
+
 function callback_yfNiDaqAoF(handles)
 [AoCh, Value] = setTerminationAoCh(handles);
 AoWaveform = handles.axes2.Children.YData;
 rate = str2double(handles.edit1.String);
 yfNiDaqAoF(AoCh, AoWaveform, rate)
+
+function callback_yfNiDaqAoFTrig(handles)
+[AoCh, Value] = setTerminationAoCh(handles);
+AoWaveform = handles.axes2.Children.YData;
+rate = str2double(handles.edit1.String);
+TriggerTimeout = str2double(handles.edit14.String);
+yfNiDaqAoFTrig(AoCh, AoWaveform, rate, TriggerTimeout)
 
 function callback_yfNiDaqAoSS(handles)
 %
@@ -487,7 +522,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-
 % --- Executes during object creation, after setting all properties.
 function edit10_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit10 (see GCBO)
@@ -500,7 +534,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-
 % --- Executes on button press in pushbutton5.
 function pushbutton5_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton5 (see GCBO)
@@ -510,14 +543,12 @@ Str = [handles.edit2.String '.mat'];
 Expr = ['save(''' Str ''')'];
 evalin('base', Expr);
 
-
 % --- Executes on button press in pushbutton6.
 function pushbutton6_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 who
-
 
 % --- Executes on key press with focus on edit10 and none of its controls.
 function edit10_KeyPressFcn(hObject, eventdata, handles)
@@ -532,7 +563,6 @@ if(strcmp(eventdata.Key, 'return'))
     Time = linspace(0, length(StimWave), length(StimWave))/str2num(handles.edit1.String);
     plot(handles.axes2, Time, StimWave);
 end
-
 
 % --- Executes on selection change in popupmenu9.
 function popupmenu9_Callback(hObject, eventdata, handles)
@@ -568,19 +598,16 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 update_popupmenu(hObject)
 
-
 % --- Executes on selection change in popupmenu10.
 function popupmenu10_Callback(hObject, eventdata, handles)
 % hObject    handle to popupmenu10 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-
 function edit10_Callback(hObject, eventdata, handles)
 % hObject    handle to edit10 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 
 % --- Executes on selection change in popupmenu1.
 function popupmenu1_Callback(hObject, eventdata, handles)
@@ -588,13 +615,10 @@ function popupmenu1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-
-
 function edit11_Callback(hObject, eventdata, handles)
 % hObject    handle to edit11 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 
 % --- Executes during object creation, after setting all properties.
 function edit11_CreateFcn(hObject, eventdata, handles)
@@ -608,7 +632,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-
 % --- Executes on button press in checkbox11.
 function checkbox11_Callback(hObject, eventdata, handles)
 % hObject    handle to checkbox11 (see GCBO)
@@ -620,7 +643,6 @@ bit2 = get(handles.checkbox13, 'Value');
 bit3 = get(handles.checkbox14, 'Value');
 dec = binaryVectorToDecimal([bit0 bit1 bit2 bit3], 'LSBFirst');
 set(handles.edit12, 'String', num2str(dec));
-
 
 % --- Executes on button press in checkbox12.
 function checkbox12_Callback(hObject, eventdata, handles)
@@ -634,7 +656,6 @@ bit3 = get(handles.checkbox14, 'Value');
 dec = binaryVectorToDecimal([bit0 bit1 bit2 bit3], 'LSBFirst');
 set(handles.edit12, 'String', num2str(dec));
 
-
 % --- Executes on button press in checkbox13.
 function checkbox13_Callback(hObject, eventdata, handles)
 % hObject    handle to checkbox13 (see GCBO)
@@ -647,7 +668,6 @@ bit3 = get(handles.checkbox14, 'Value');
 dec = binaryVectorToDecimal([bit0 bit1 bit2 bit3], 'LSBFirst');
 set(handles.edit12, 'String', num2str(dec));
 
-
 % --- Executes on button press in checkbox14.
 function checkbox14_Callback(hObject, eventdata, handles)
 % hObject    handle to checkbox14 (see GCBO)
@@ -659,7 +679,6 @@ bit2 = get(handles.checkbox13, 'Value');
 bit3 = get(handles.checkbox14, 'Value');
 dec = binaryVectorToDecimal([bit0 bit1 bit2 bit3], 'LSBFirst');
 set(handles.edit12, 'String', num2str(dec));
-
 
 function edit12_Callback(hObject, eventdata, handles)
 % hObject    handle to edit12 (see GCBO)
@@ -692,10 +711,29 @@ function edit13_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-
 % --- Executes during object creation, after setting all properties.
 function edit13_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit13 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+function edit14_Callback(hObject, eventdata, handles)
+% hObject    handle to edit14 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit14 as text
+%        str2double(get(hObject,'String')) returns contents of edit14 as a double
+
+% --- Executes during object creation, after setting all properties.
+function edit14_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit14 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
