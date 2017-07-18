@@ -159,6 +159,12 @@ plot(handles.axes1, Time, Data);
 assignin('base', handles.edit3.String, Data);
 assignin('base', handles.edit4.String, Time);
 
+function callback_yfNiDaqAiBCont(handles)
+AiCh = setTerminationAiCh(handles);
+rate = str2double(handles.edit1.String);
+yfNiDaqAiBCont(AiCh, rate)
+
+
 function callback_yfNiDaqAiF(handles)
 AiCh = setTerminationAiCh(handles);
 rate = str2double(handles.edit1.String);
