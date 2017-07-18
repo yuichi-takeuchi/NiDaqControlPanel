@@ -50,7 +50,8 @@ help yfNiDaqAoBContDoConst
 We use [SemVer](http://semver.org/) for versioning.
 
 ## Releases
-* Ver 1.0.0, 2017/06/17
+* Ver 1.1.0, 2017/07/18: Addition and modification of *Trig.m functions.
+* Ver 1.0.0, 2017/06/17: The first release.
 
 ## Authors
 * **Yuichi Takeuchi PhD** - *Initial work* - [GitHub](https://github.com/yuichi-takeuchi)
