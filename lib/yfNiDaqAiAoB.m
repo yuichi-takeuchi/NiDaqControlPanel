@@ -28,10 +28,17 @@ queueOutputData(s, OutputSignal);
 
 fid1 = fopen('log.bin','w');
 lh = addlistener(s,'DataAvailable',@(src, event)yfplotlogData(src, event, fid1));
+
+% Sound
+StartSound = sin(linspace(0, 2*pi*440, 5000)); StartSound = StartSound(1:1500);
+EndSound = sin(linspace(0, 2*pi*880, 5000)); EndSound = EndSound(1:2500);
+
+sound(StartSound, 5000);
 s.startBackground();
 s.wait(size(AoWaveform, 2)/rate + 1);
 delete(lh);
 
+sound(EndSound, 5000);
 fclose(fid1);
 fid2 = fopen('log.bin','r');
 [data,count] = fread(fid2,[length(AiCh)+1,inf],'double');

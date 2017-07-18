@@ -56,6 +56,7 @@ digitalReset = zeros(1,length(binaryVector));
 % sound(StartSound, 5000);
 % outputSingleScan(s2, binaryVector)
 pause(Latency)
+disp('wating trig...')
 s1.startBackground();
 tStart = tic;
 s1.wait()
@@ -64,6 +65,6 @@ outputSingleScan(s1, 0);
 pause(Latency)
 outputSingleScan(s2, digitalReset);
 % sound(EndSound, 5000);
-
+disp('done')
 end
 

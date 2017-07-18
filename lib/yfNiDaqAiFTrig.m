@@ -8,7 +8,7 @@ function [Data, Time] = yfNiDaqAiFTrig(AiCh, rate, duration, TriggerTimeout)
 %   Data: Matrix or Matrix
 %   Time: Vector
 %
-% Copyright (c) 2015 Yuichi Takeuchi
+% Copyright (c) 2015, 2017 Yuichi Takeuchi
 %
 
 d = daq.getDevices;
@@ -29,6 +29,15 @@ s.Connections(1).TriggerCondition = 'RisingEdge';
 s.TriggersPerRun = 1;
 s.ExternalTriggerTimeout = TriggerTimeout;
 
+% Sound
+StartSound = sin(linspace(0, 2*pi*440, 5000)); StartSound = StartSound(1:1500);
+EndSound = sin(linspace(0, 2*pi*880, 5000)); EndSound = EndSound(1:2500);
+
+sound(StartSound, 5000);
+disp('waiting trig...')
 [Data, Time] = s.startForeground();
+
+sound(EndSound, 5000);
+
 plot(Time, Data)
 end

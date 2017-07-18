@@ -32,19 +32,28 @@ aoch = addAnalogOutputChannel(s, d.ID, AoCh, 'Voltage');
 OutputSignal = AoWaveform';
 queueOutputData(s, OutputSignal);
 
+% Sound
+StartSound = sin(linspace(0, 2*pi*440, 5000)); StartSound = StartSound(1:1500);
+EndSound = sin(linspace(0, 2*pi*880, 5000)); EndSound = EndSound(1:2500);
+
+sound(StartSound, 5000);
+
+disp('waiting trigger...')
 [Data, Time] = s.startForeground();
 
-subplot(2, 1, 1)
-plot(Time, AoWaveform)
-ylabel('Voltage');
-xlabel('Time');
-title('Output wave')
-grid on
-subplot(2, 1, 2)
-plot(Time, Data)
-ylabel('Voltage');
-xlabel('Time');
-title('Acquired Signal')
-grid on;
+sound(EndSound, 5000);
+
+% subplot(2, 1, 1)
+% plot(Time, AoWaveform)
+% ylabel('Voltage');
+% xlabel('Time');
+% title('Output wave')
+% grid on
+% subplot(2, 1, 2)
+% plot(Time, Data)
+% ylabel('Voltage');
+% xlabel('Time');
+% title('Acquired Signal')
+% grid on;
 
 end

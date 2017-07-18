@@ -59,6 +59,7 @@ tStart = tic;
 s.wait()
 % s.wait(timeout)
 outputSingleScan(s, 0);
+disp('done')
 % sound(EndSound, 5000);
 
 end

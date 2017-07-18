@@ -39,10 +39,9 @@ queueOutputData(s, OutputSignal);
 % EndSound = sin(linspace(0, 2*pi*880, 5000)); EndSound = EndSound(1:2500);
 % 
 % sound(StartSound, 5000);
-
-s.startForeground;
 disp('waiting trigger...')
+s.startForeground;
 outputSingleScan(s, 0);
-
+disp('done')
 % sound(EndSound, 5000);
 end

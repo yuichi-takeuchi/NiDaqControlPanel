@@ -23,6 +23,14 @@ end
 % ch(1).TerminalConfig = 'SingleEnded';   % Configure the terminal and range of the chanels in the session.
 % ch(1).Range = [-10.0 10.0];
 
+% Sound
+StartSound = sin(linspace(0, 2*pi*440, 5000)); StartSound = StartSound(1:1500);
+EndSound = sin(linspace(0, 2*pi*880, 5000)); EndSound = EndSound(1:2500);
+
+sound(StartSound, 5000);
+
 [Data, Time] = s.startForeground();
 plot(Time, Data)
+
+sound(EndSound, 5000);
 end
