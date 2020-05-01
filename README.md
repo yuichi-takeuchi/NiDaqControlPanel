@@ -1,24 +1,24 @@
 # NiDaqControlPanel
-Matlab GUI for controlling National Instruments data acquisition boards
+MATLAB GUI for controlling National Instruments data acquisition boards
 
 ## Getting Started
 
 ### Prerequisites
 * National Intruments Daq board (http://www.ni.com/data-acquisition/)
-* Matlab (https://www.mathworks.com/products/matlab.html)
+* MATLAB (https://www.mathworks.com/products/matlab.html)
 * Data Acquisition Toolbox (https://www.mathworks.com/products/daq.html)
 * Singal Processing Toolbox (https://www.mathworks.com/products/signal.html) (Optional: required only for stimf_CreateSquarePulses.m)
 
-The code has been tested with a USB-6212, Matlab ver 8.6 (R2015b), Data Acquisition Toolbox ver 3.5.2 (R2015b), and Signal Processing Toolbox ver 7.1 (R2015b).
+The code has been tested with a USB-6212, MATLAB ver 8.6 (R2015b), Data Acquisition Toolbox ver 3.5.2 (R2015b), and Signal Processing Toolbox ver 7.1 (R2015b).
 
 ### Installing
 * Install Matlab, Data Acquisition Toolbox, and Driver (NI-DAQmx).
 * Connect your Ni Daq to your PC.
-* Give your Matlab pass to the m and fig files.
+* Give your MATLAB path to the m and fig files.
 
 ### How to use
 * With GUI (NiDaqControlPanel)
-1. Launch Matlab.
+1. Launch MATLAB.
 2. Launch NiDaqControlPanel as
 ```
 guide NiDaqControlPanel.fig
@@ -56,7 +56,7 @@ We use [SemVer](http://semver.org/) for versioning.
 ## Authors
 * **Yuichi Takeuchi PhD** - *Initial work* - [GitHub](https://github.com/yuichi-takeuchi)
 * Affiliation: Department of Physiology, University of Szeged, Hungary
-* E-mail: yuichi-takeuchi@umin.net
+* E-mail: takeuchi.yuichi@med.u-szeged.hu
 
 ## License
 This project is licensed under the MIT License.
